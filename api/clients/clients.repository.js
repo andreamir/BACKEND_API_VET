@@ -34,6 +34,11 @@ async function put({ _id, newClient }) {
   return replacedClient;
 }
 
+async function patch({ _id, changedFields }) {
+  const updatedClient = await clientModel.findByIdAndUpdate({ _id }, changedFields);
+  return updatedClient;
+}
+
 export {
   getAll,
   getByDocumentNumber,
@@ -41,4 +46,5 @@ export {
   getByFilter,
   clear,
   put,
+  patch,
 };

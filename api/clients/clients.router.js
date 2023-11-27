@@ -10,5 +10,6 @@ router.get('/byFilter', clientsController.getByFilter);
 router.post('/', clientsController.post);
 router.delete('/:id', clientsController.clear);
 router.put('/:id', clientsController.put);
+router.patch('/:id', clientsController.patch);
 
 export default router;

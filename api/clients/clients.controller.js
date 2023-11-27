@@ -53,6 +53,13 @@ async function put(req, res) {
   res.json({ msg: 'Replaced client:', replacedClient });
 }
 
+async function patch(req, res) {
+  const { id } = req.params;
+  const { body } = req;
+  const updatedClient = await clientsService.patch({ _id: id, changedFields: body });
+  res.json({ msg: 'Updated client:', updatedClient });
+}
+
 export {
   getAll,
   getByDocumentNumber,
@@ -60,4 +67,5 @@ export {
   post,
   clear,
   put,
+  patch,
 };
