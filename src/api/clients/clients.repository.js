@@ -30,12 +30,16 @@ async function clear({ _id }) {
 }
 
 async function put({ _id, newClient }) {
-  const replacedClient = await clientModel.findOneAndReplace({ _id }, newClient);
+  const replacedClient = await clientModel.findOneAndReplace({ _id }, newClient, {
+    new: true,
+  });
   return replacedClient;
 }
 
 async function patch({ _id, changedFields }) {
-  const updatedClient = await clientModel.findByIdAndUpdate({ _id }, changedFields);
+  const updatedClient = await clientModel.findByIdAndUpdate(_id, changedFields, {
+    new: true,
+  });
   return updatedClient;
 }
 

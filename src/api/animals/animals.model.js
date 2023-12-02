@@ -1,44 +1,43 @@
 import { Schema, model } from 'mongoose';
 
-const clientsSchema = new Schema({
+const { ObjectId } = Schema.Types;
+
+const animalsSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  surname: {
+  species: {
+    type: String,
+    required: true,
+    enum: ['cat', 'dog', 'parrot', 'hamster', 'rabbit', 'fish'],
+  },
+  breed: {
     type: String,
     required: true,
   },
-  email: {
+  sex: {
     type: String,
     required: true,
-    // eslint-disable-next-line no-useless-escape
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+    enum: ['male', 'female', 'unknown'],
   },
-  phone: {
+  chipNumber: {
+    type: String,
+    unique: true,
+  },
+  birth: {
     type: String,
     required: true,
   },
-  adress: {
-    type: String,
-    required: true,
-  },
-  document: {
-    type: {
-      type: String,
-      required: true,
-      enums: ['DNI', 'NIE', 'Passport'],
-    },
-    number: {
-      type: String,
-      required: true,
-    },
+  clientId: {
+    type: ObjectId,
+    ref: 'Client',
   },
 });
 
-const clientModel = model('Client', clientsSchema);
+const animalsModel = model('Animal', animalsSchema);
 // model('Clientes', clientsSchema, 'clients'), buscaría
 // dentro de clients en el db por el tercer atributo, sino
 // buscaria en clientess, porque mongoose hace la primera
 // minusculas y añade una s al final
-export default clientModel;
+export default animalsModel;

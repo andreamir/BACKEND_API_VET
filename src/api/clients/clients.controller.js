@@ -1,6 +1,7 @@
 import * as clientsService from './clients.service.js';
 
 async function getAll(req, res) {
+  console.log(req.user);
   const clients = await clientsService.getAll();
   // console.log(clients);
   res.json(clients);

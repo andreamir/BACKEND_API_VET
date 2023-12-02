@@ -7,6 +7,7 @@ async function getAll() {
 
 async function getByDocumentNumber({ documentNumber }) {
   const client = await clientsRepository.getByDocumentNumber({ documentNumber });
+  // console.log('client service', client);
   return client;
 }
 
@@ -21,14 +22,14 @@ async function post({ newClient }) {
 }
 
 async function clear({ _id }) {
-  console.log('id service', _id);
+  // console.log('id service', _id);
   const deletedClient = await clientsRepository.clear({ _id });
-  console.log('deletedClient', deletedClient);
+  // console.log('deletedClient', deletedClient);
   return deletedClient;
 }
 
 async function put({ _id, newClient }) {
-  const replacedClient = await clientsRepository.put({ _id, newClient });
+  const replacedClient = await clientsRepository.put({ _id }, newClient);
   return replacedClient;
 }
 
