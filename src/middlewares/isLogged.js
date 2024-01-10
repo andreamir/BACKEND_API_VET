@@ -20,10 +20,12 @@ function isLogged(req, res, next) {
   const token = req.headers.authorization;
   if (!token) {
     unauthorized(res);
+    console.log('No hay token');
     return;
   }
-  const secretWord = 'isASecret';
-  jwt.verify(token, secretWord, async (error, payload) => {
+  const { TOKEN_SECRET_WORD } = process.env;
+
+  jwt.verify(token, TOKEN_SECRET_WORD, async (error, payload) => {
     if (error) {
       console.error('jsw error');
       unauthorized(res);

@@ -1,8 +1,22 @@
 import * as animalsRepository from './animals.repository.js';
 import * as clientsService from '../clients/clients.service.js';
 
+function getSkipAndLimit({ page, items }) {
+  const skip = (page - 1) * items;
+  const limit = items;
+  return { skip, limit };
+}
+
 async function getAll(query) {
-  const animals = await animalsRepository.getAll(query);
+  const { page, items, ...newQuery } = query;
+  const { skip, limit } = getSkipAndLimit({ page, items });
+  const animals = await animalsRepository.getAll({ skip, limit, newQuery });
+  return animals;
+}
+
+async function getPagination({ page, items }) {
+  const { skip, limit } = getSkipAndLimit({ page, items });
+  const animals = await animalsRepository.getPagination(limit, skip);
   return animals;
 }
 
@@ -25,4 +39,5 @@ export {
   getAll,
   getByClientDocumentNumber,
   updateByClientNumber,
+  getPagination,
 };

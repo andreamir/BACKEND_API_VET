@@ -22,6 +22,9 @@ const usersSchema = new Schema({
     type: String,
     required: true,
   },
+  confirmed: {
+    type: Boolean,
+  },
 });
 
 const userModel = model('User', usersSchema);

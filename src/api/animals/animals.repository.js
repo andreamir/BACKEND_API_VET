@@ -1,8 +1,22 @@
 import animalsModel from './animals.model.js';
 
-async function getAll(query) {
+async function getAll({ skip, limit, newQuery }) {
+  // console.log('itemsRepo', items);
   const animals = await animalsModel
-    .find(query)
+    .find(newQuery)
+    .skip(skip)
+    .limit(limit)
+    .populate({ path: 'clientId', select: 'name phone -_id' })
+    .lean();
+  return animals;
+  // lean transforma objectoMongoose en objetoJs
+}
+
+async function getPagination({ limit, skip }) {
+  const animals = await animalsModel
+    .find({})
+    .skip(skip)
+    .limit(limit)
     .populate({ path: 'clientId', select: 'name phone -_id' })
     .lean();
   return animals;
@@ -29,4 +43,5 @@ export {
   getAll,
   getByClientId,
   updateByClientId,
+  getPagination,
 };
