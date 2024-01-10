@@ -1,7 +1,7 @@
-import * as basicInfo from './basicInfo.js';
+// import * as basicInfo from './basicInfo.js';
 
-const docs = {
-  ...basicInfo,
-  ...components,
-};
-export default basicInfo;
+// const docs = {
+//   ...basicInfo,
+//   ...components,
+// };
+// export default basicInfo;
